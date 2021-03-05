@@ -24,27 +24,29 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //create table
-        FeedReaderDbHelper dbHelper = new FeedReaderDbHelper(MainActivity.this);
+        FeedReaderDbHelper dbHelper;
+        dbHelper = new FeedReaderDbHelper(MainActivity.this);
 
         //insert
-        EditText title = findViewById(R.id.textView14);
-        EditText subtitle = findViewById(R.id.textView15);
-        Button insert = findViewById(R.id.button5);
+        EditText title = findViewById(R.id.editTextTitleInsert);
+        EditText subtitle = findViewById(R.id.editTextSubtitleInsert);
+        Button insert = findViewById(R.id.insert);
         insert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 insert(dbHelper,title.getText().toString(),subtitle.getText().toString());
                 title.setText("");
                 subtitle.setText("");
+                show(dbHelper);
             }
         });
 
 
- //---------------------------------------------------------------------------------------------
+    //---------------------------------------------------------------------------------------------
 
 
         //show
-        Button show = findViewById(R.id.button);
+        Button show = findViewById(R.id.show);
         show.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //default show
+        //auto show
         show(dbHelper);
     }
 
@@ -127,9 +129,9 @@ public class MainActivity extends AppCompatActivity {
             itemIds.add("itemId");
         }
         cursor.close();
-        TextView Idtv = findViewById(R.id.textView2);
-        TextView Titletv = findViewById(R.id.textView4);
-        TextView Subtv = findViewById(R.id.textView5);
+        TextView Idtv = findViewById(R.id.idText);
+        TextView Titletv = findViewById(R.id.titleText);
+        TextView Subtv = findViewById(R.id.subtitleText);
         Idtv.setText(ID.toString());
         Titletv.setText(TITLE.toString());
         Subtv.setText(SUBTITLE.toString());
