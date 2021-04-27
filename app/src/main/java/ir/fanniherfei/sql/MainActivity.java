@@ -15,6 +15,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.provider.BaseColumns;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -24,6 +26,8 @@ import android.widget.ScrollView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
     String sortArrangement = "ASC";
     String selection = null;
     String[] selectionArgs = null;
+    int sorted =0;
+    boolean filterOn = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -117,17 +123,45 @@ public class MainActivity extends AppCompatActivity {
         //insert
         EditText title = findViewById(R.id.editTextTitleInsert);
         EditText subtitle = findViewById(R.id.editTextSubtitleInsert);
+        EditText ID = findViewById(R.id.editTextIdInsert);
         Button insert = findViewById(R.id.insert);
         insert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(ID.getText().toString().isEmpty())
                 insert(dbHelper,title.getText().toString(),subtitle.getText().toString());
+                else{
+                    if(title.getText().length() != 0)
+                        update(title.getText().toString(),FeedEntry.COLUMN_NAME_TITLE,ID.getText().toString());
+                    if(subtitle.getText().length() != 0)
+                        update(subtitle.getText().toString(),FeedEntry.COLUMN_NAME_SUBTITLE,ID.getText().toString());
+                }
                 title.setText("");
                 subtitle.setText("");
                 show();
             }
         });
 
+        //update
+        ID.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            if (s.length() == 0)
+                insert.setText("insert");
+            else
+                insert.setText("update");
+            }
+        });
 
     //---------------------------------------------------------------------------------------------
 
@@ -142,36 +176,29 @@ public class MainActivity extends AppCompatActivity {
 
         //filter
         EditText filterValue = findViewById(R.id.editTextTitleFilter);
-        CheckBox filterOn = findViewById(R.id.checkBox);
         Switch columnFilter = findViewById(R.id.switch2);
-
-        //column
-        columnFilter.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        FloatingActionButton Filter = findViewById(R.id.floatingActionButton);
+        CardView filterCard = findViewById(R.id.filterCard);
+        Button filterButton = findViewById(R.id.filter);
+        filterCard.setVisibility(View.GONE);
+        filterButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-                if(!filterOn.isChecked())
-                    return;
-                switchFilterColumn(columnFilter);
-
-            }
-        });
-        filterOn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(!isChecked){
-                    selection = null;
-                    selectionArgs = null;
-                    show();
-                }else{
+            public void onClick(View v) {
                     if(filterValue.getText().toString().isEmpty()){
-                        filterOn.setChecked(false);
                         return;}
                     selectionArgs = new String[1];
                     selectionArgs[0] = filterValue.getText().toString();
                     switchFilterColumn(columnFilter);
-                }
-
+            }
+        });
+        Filter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                filterCard.setVisibility(filterOn ? View.GONE : View.VISIBLE);
+                filterOn = !filterOn;
+                selection = null;
+                selectionArgs  = null;
+                show();
             }
         });
 
@@ -182,6 +209,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 sortColumn = FeedEntry._ID;
+                sortArrangement = (sorted != 0) ? "DESC": sortArrangement;
+                sorted = 0;
                 if("ASC".equals(sortArrangement)){
                     sortArrangement = "DESC";
                     IdShow.setBackgroundColor(Color.parseColor("#ff0000"));
@@ -201,6 +230,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 sortColumn = FeedEntry.COLUMN_NAME_TITLE;
+                sortArrangement = (sorted != 1) ? "DESC": sortArrangement;
+                sorted = 1;
                 if("ASC".equals(sortArrangement)){
                     sortArrangement = "DESC";
                     titleShow.setBackgroundColor(Color.parseColor("#ff0000"));
@@ -220,6 +251,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 sortColumn = FeedEntry.COLUMN_NAME_SUBTITLE;
+                sortArrangement = (sorted != 2) ? "DESC": sortArrangement;
+                sorted = 2;
                 if("ASC".equals(sortArrangement)){
                     sortArrangement = "DESC";
                     subtitleShow.setBackgroundColor(Color.parseColor("#ff0000"));
@@ -242,8 +275,25 @@ public class MainActivity extends AppCompatActivity {
             selection = FeedEntry.COLUMN_NAME_TITLE + " = ?";
         else
             selection = FeedEntry.COLUMN_NAME_SUBTITLE + " = ?";
-
         show();
+    }
+    void update(String newvalue,String culumn,String ID){
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        // New value for one column
+        ContentValues values = new ContentValues();
+        values.put(culumn, newvalue);
+
+        // Which row to update, based on the title
+        String selection = FeedEntry._ID + " LIKE ?";
+        String[] selectionArgs = { ID };
+
+        int count = db.update(
+                FeedEntry.TABLE_NAME,
+                values,
+                selection,
+                selectionArgs);
+
     }
     void insert(FeedReaderDbHelper dbHelper,String title,String subtitle){
         //insert
