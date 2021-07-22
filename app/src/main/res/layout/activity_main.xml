@@ -110,14 +110,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.6" />
+                app:layout_constraintGuide_percent="0.45" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.75" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.2" />
+                app:layout_constraintGuide_percent="0.15" />
 
             <TextView
                 android:id="@+id/textViewSubtitleInsert"
@@ -132,8 +139,25 @@
                 android:gravity="center"
                 android:text="Subtitle"
                 android:textColor="@color/teal_200"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/guideline9"
                 app:layout_constraintStart_toStartOf="@+id/guideline14"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textViewCheckedInsert"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:background="@color/purple_700"
+                android:gravity="center"
+                android:text="Checked"
+                android:textColor="@color/teal_200"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline9"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
@@ -141,10 +165,27 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
                 android:hint="subtitle"
                 android:textColor="#000000"
-                app:layout_constraintEnd_toEndOf="@+id/textViewSubtitleInsert"
+                app:layout_constraintEnd_toStartOf="@+id/guideline9"
                 app:layout_constraintStart_toStartOf="@+id/textViewSubtitleInsert"
+                app:layout_constraintTop_toBottomOf="@+id/textViewSubtitleInsert" />
+
+            <EditText
+                android:id="@+id/editTextCheckedInsert"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:hint="Checked"
+                android:textColor="#000000"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline9"
                 app:layout_constraintTop_toBottomOf="@+id/textViewSubtitleInsert" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -214,7 +255,7 @@
                 android:layout_marginRight="8dp"
                 android:background="@color/purple_700"
                 android:gravity="center"
-                android:text="Name"
+                android:text="name"
                 android:textColor="@color/teal_200"
                 app:layout_constraintEnd_toStartOf="@+id/guideline25"
                 app:layout_constraintStart_toStartOf="parent"
@@ -244,7 +285,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
-                android:hint="name"
+                android:hint="tn"
                 android:textColor="#000000"
                 app:layout_constraintEnd_toStartOf="@+id/guideline25"
                 app:layout_constraintStart_toStartOf="parent"
@@ -255,14 +296,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.6" />
+                app:layout_constraintGuide_percent="0.45" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.75" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline25"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.3" />
+                app:layout_constraintGuide_percent="0.21" />
 
             <TextView
                 android:id="@+id/textViewSubtitleCreate"
@@ -277,8 +325,25 @@
                 android:gravity="center"
                 android:text="Second Culumn"
                 android:textColor="@color/teal_200"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/guideline8"
                 app:layout_constraintStart_toStartOf="@+id/guideline24"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textViewSubtitleCreate2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:background="@color/purple_700"
+                android:gravity="center"
+                android:text="THIRD"
+                android:textColor="@color/teal_200"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline8"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
@@ -286,11 +351,28 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
                 android:hint="subtitle"
                 android:textColor="#000000"
-                app:layout_constraintEnd_toEndOf="@+id/textViewSubtitleCreate"
+                app:layout_constraintEnd_toStartOf="@+id/guideline8"
                 app:layout_constraintStart_toStartOf="@+id/textViewSubtitleCreate"
                 app:layout_constraintTop_toBottomOf="@+id/textViewSubtitleCreate" />
+
+            <EditText
+                android:id="@+id/editTextThirdCreate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:hint="Checked"
+                android:textColor="#000000"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline8"
+                app:layout_constraintTop_toBottomOf="@+id/textViewSubtitleCreate2" />
 
             <Switch
                 android:id="@+id/switch1"
@@ -362,7 +444,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.2" />
+                app:layout_constraintGuide_percent="0.15" />
 
             <TextView
                 android:id="@+id/titleHead"
@@ -386,7 +468,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.66" />
+                app:layout_constraintGuide_percent="0.45" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.75" />
 
             <TextView
                 android:id="@+id/subtitleHead"
@@ -401,8 +490,25 @@
                 android:gravity="center"
                 android:text="Subtitle"
                 android:textColor="@color/purple_700"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/guideline10"
                 app:layout_constraintStart_toStartOf="@+id/guideline4"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/checkedHead"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:background="@color/teal_200"
+                android:gravity="center"
+                android:text="Checked"
+                android:textColor="@color/purple_700"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline10"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.recyclerview.widget.RecyclerView

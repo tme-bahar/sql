@@ -15,15 +15,17 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     private List<String> ID;
     private List<String> TITLE;
     private List<String> SUBTITLE;
+    private List<String> CHECKED;
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
 
     // data is passed into the constructor
-    MyRecyclerViewAdapter(Context context, List<String> ID, List<String> TITLE, List<String> SUBTITLE) {
+    MyRecyclerViewAdapter(Context context, List<String> ID, List<String> TITLE, List<String> SUBTITLE, List<String> CHECKED) {
         this.mInflater = LayoutInflater.from(context);
         this.ID = ID;
         this.TITLE = TITLE;
         this.SUBTITLE = SUBTITLE;
+        this.CHECKED = CHECKED;
     }
 
     // inflates the row layout from xml when needed
@@ -39,9 +41,11 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         String ID = this.ID.get(position);
         String TITLE = this.TITLE.get(position);
         String SUBTITLE = this.SUBTITLE.get(position);
+        String CHECKED = this.CHECKED.get(position);
         holder.myTextView.setText(ID);
         holder.myTextView2.setText(TITLE);
         holder.myTextView3.setText(SUBTITLE);
+        holder.myTextView4.setText(CHECKED);
     }
 
     // total number of rows
@@ -55,12 +59,14 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         TextView myTextView;
         TextView myTextView2;
         TextView myTextView3;
+        TextView myTextView4;
 
         ViewHolder(View itemView) {
             super(itemView);
             myTextView = itemView.findViewById(R.id.textView);
             myTextView2 = itemView.findViewById(R.id.textView2);
             myTextView3 = itemView.findViewById(R.id.textView3);
+            myTextView4 = itemView.findViewById(R.id.textView6);
             itemView.setOnClickListener(this);
         }
 
